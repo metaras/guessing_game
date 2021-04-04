@@ -19,6 +19,7 @@ def index():
         "step":0,
         "guessing": [],
         "answer": [],
+        "hint": ['*', '*', '*', '*'],
         "win": False
     })
     return render_template('index.html')
@@ -41,7 +42,6 @@ def start():
 @application.route('/play', methods=["POST", "GET"])
 def play():
     game = db.games.find_one()
-    hint = ['*', '*', '*', '*']
     if request.method == 'POST':
         choice = request.form['achoice']
         game['guessing'].append(choice)
@@ -51,7 +51,7 @@ def play():
                 "guessing": game['guessing']
             }
         })
-    return render_template('play.html', game=game, hint=hint)
+    return render_template('play.html', game=game)
 
 @application.route('/check', methods=["POST", "GET"])
 def check():
@@ -73,6 +73,7 @@ def check():
     db.games.update_one({},{
         '$set':{
             "guessing": [],
+            'hint': hint
         }
     })
     if correct:
@@ -80,9 +81,9 @@ def check():
         '$set':{
             "win": True,
         }
-    })
-        return render_template('index.html', game=game)
-    return render_template('play.html', game=game, hint=hint)
+        })
+        return render_template('end.html', game=game)
+    return render_template('play.html', game=game)
         
 # @application.route('/sample')
 # def sample():

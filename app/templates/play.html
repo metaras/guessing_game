@@ -1,5 +1,5 @@
 <h1>start game</h1>
-<p>{{hint}}</p>
+<p>{{game.hint}}</p>
 <form action='/play' method="POST">
     {% if ((game.step+1)%4) == 0%}
     <a href="{{ url_for('check')}}">Check</a> {% else %}
@@ -11,4 +11,3 @@
 <p>
     {{game.guessing}}
 </p>
-<p>{{game.step}}</p>
