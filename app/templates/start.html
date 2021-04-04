@@ -1,0 +1,14 @@
+<h1>Hi</h1>
+<p>Please Choose A or B or C or D to add the character</p>
+</br>
+<p>{{game.answer}}</p>
+{% if game.step == 3 %}
+<a href="{{ url_for('play')}}">Play</a> {% else %}
+<form action='/start' method="POST">
+    <input type="submit" name="qchoice" value="A" />
+    <input type="submit" name="qchoice" value="B" />
+    <input type="submit" name="qchoice" value="C" />
+    <input type="submit" name="qchoice" value="D" />
+</form>
+{% endif %}
+<p>{{game.step}}</p>

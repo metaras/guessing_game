@@ -1,0 +1,14 @@
+<h1>start game</h1>
+<p>{{hint}}</p>
+<form action='/play' method="POST">
+    {% if ((game.step+1)%4) == 0%}
+    <a href="{{ url_for('check')}}">Check</a> {% else %}
+    <input type="submit" name="achoice" value="A" />
+    <input type="submit" name="achoice" value="B" />
+    <input type="submit" name="achoice" value="C" />
+    <input type="submit" name="achoice" value="D" /> {% endif %}
+</form>
+<p>
+    {{game.guessing}}
+</p>
+<p>{{game.step}}</p>
